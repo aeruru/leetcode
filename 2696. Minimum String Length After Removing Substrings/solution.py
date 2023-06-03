@@ -1,9 +1,9 @@
 class Solution:
     # Given a string of uppercase English letters, repeatedly remove
     # any instances of "AB" or "CD" from the string until no more instances
-    # exist. Return the length of the resulting string.
+    # exist. Removing an instance could result in a new AB or CD to be formed
+    # which needs to be removed as well. Return the length of the resulting string.
     def minLength(self, s: str) -> int:
-
         # Convert from an immutable string to a list so we can delete items
         # from it
         listS = list(s)
@@ -13,7 +13,6 @@ class Solution:
         # we look forward when we see an "A" or "C".
         i = 0
         while i < len(listS) - 1:
-
             letter = listS[i]
             nextLetter = listS[i+1]
             doDeletes = False
@@ -33,6 +32,8 @@ class Solution:
             # "AB" and "CD" are length two sequences.
             if doDeletes:
                 listS.pop(i)
+                # Note the second one is also a pop(i) since after the first pop,
+                # i is not the i+1th element before the first pop.
                 listS.pop(i)
                 # If possible, back index up by one and look to see if the 
                 # letters surrounding the deleted ones form one of the sequences
