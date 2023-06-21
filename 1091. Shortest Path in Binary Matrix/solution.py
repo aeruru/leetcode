@@ -9,7 +9,7 @@ class Solution:
         gridHeight = len(grid)
         gridWidth = len(grid[0])
         
-        if grid[0][0] != 0 or grid[gridHeight-1][gridWidth-1] != 0:
+        if grid[0][0] != 0 or grid[-1][-1] != 0:
             return -1
         
         # Use BFS to find the shortest path so keep track of nodes
@@ -30,7 +30,8 @@ class Solution:
             numCurrentRoundCells = len(queue)
             while numCurrentRoundCells > 0:
 
-                # pop next cell from front of queue to process
+                # pop next cell from front of queue to process. It is a tuple of the
+                # row index and col index of the cell.
                 (row, col) = queue.pop(0)
                 # print(f"Processing ({row}, {col})")
 
@@ -48,7 +49,7 @@ class Solution:
                 for rowOffset in [-1, 0, 1]:
                     adjacentRow = row + rowOffset
                     
-                    # check for invalid row indexes
+                    # check for invalid row indices
                     if adjacentRow < 0 or adjacentRow >= gridHeight:
                         continue
                     
@@ -73,7 +74,7 @@ class Solution:
                             grid[adjacentRow][adjacentCol] = -1
                             # print(f"Adding adjacent cell ({adjacentRow}, {adjacentCol}) to queue")
 
-            # Increment the # of rounds in the outer loop
+            # Increment the number of rounds in the outer loop
             roundNum += 1
 
         # No path was found so return -1
