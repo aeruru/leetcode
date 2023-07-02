@@ -31,7 +31,7 @@ class Solution:
                 # For any two bombs, use the pythagorean theorem to
                 # determine the square of the distance between their
                 # locations.
-                distanceSquared = ((x1 - x2) * (x1 - x2)) + ((y1 - y2) * (y1 - y2))
+                distanceSquared = ((x1 - x2)**2) + ((y1 - y2)**2)
                 
                 # Check distance squared against both bomb's ranges to 
                 # determine whether bomb_i and bomb_j should have edges
@@ -46,10 +46,6 @@ class Solution:
         # Track max bombs detonated for any initial bomb
         maxBombsDetonated = 0        
 
-        # Track the number of bombs detonated for a particular initial
-        # bomb. Start at one since we detonate one bomb to begin with
-        numBombsDetonated = 1
-
         # For each bomb, do a depth first search traversal to count the
         # total number of bombs that can be reached.
         for initialBombIndex in range(len(bombs)):
@@ -58,8 +54,8 @@ class Solution:
             
             # Use a stack with int entries that represent the index 
             # of the bomb in the graph. Initialize with current bomb index
-            # and mark that bomb as being visited. Reset bombs detonated
-            # counter.
+            # and mark that bomb as being visited. Initialize bombs detonated
+            # counter to 1.
             stack = [initialBombIndex]
             visited[initialBombIndex] = True
             numBombsDetonated = 1
